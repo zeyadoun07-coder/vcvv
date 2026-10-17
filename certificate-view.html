@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض الشهادة - منصة دعاء عون</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .certificate-container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .certificate {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            border: 3px solid #6366f1;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .certificate::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .certificate-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .certificate-header {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px dashed #6366f1;
+        }
+
+        .certificate-logo {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .certificate-title {
+            font-size: 36px;
+            color: #6366f1;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .certificate-subtitle {
+            font-size: 18px;
+            color: #8b5cf6;
+            font-weight: 600;
+        }
+
+        .certificate-body {
+            margin: 50px 0;
+        }
+
+        .certificate-intro {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .student-name {
+            font-size: 32px;
+            color: #6366f1;
+            font-weight: 700;
+            margin: 20px 0;
+            text-decoration: underline;
+            text-decoration-style: double;
+            text-decoration-color: #8b5cf6;
+        }
+
+        .certificate-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 15px;
+        }
+
+        .detail-item {
+            text-align: center;
+        }
+
+        .detail-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .detail-value {
+            font-size: 22px;
+            color: #6366f1;
+            font-weight: 700;
+        }
+
+        .certificate-message {
+            font-size: 16px;
+            color: #333;
+            margin: 30px 0;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .certificate-footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px dashed #6366f1;
+        }
+
+        .signatures {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 50px;
+        }
+
+        .signature-box {
+            text-align: center;
+        }
+
+        .signature-line {
+            border-top: 2px solid #333;
+            margin-bottom: 10px;
+            height: 60px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .signature-name {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .signature-title {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .certificate-seal {
+            font-size: 80px;
+            opacity: 0.1;
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            transform: rotate(-15deg);
+        }
+
+        .date-info {
+            font-size: 14px;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #6366f1;
+            border: 2px solid #6366f1;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f4ff;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .actions {
+                display: none;
+            }
+
+            .certificate {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .certificate {
+                padding: 30px;
+            }
+
+            .certificate-title {
+                font-size: 28px;
+            }
+
+            .student-name {
+                font-size: 24px;
+            }
+
+            .certificate-details {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .signatures {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .certificate-logo {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate-container">
+        <div class="certificate">
+            <div class="certificate-seal">🏆</div>
+
+            <div class="certificate-content">
+                <!-- Header -->
+                <div class="certificate-header">
+                    <div class="certificate-logo">🎓</div>
+                    <h1 class="certificate-title">شهادة تقدير</h1>
+                    <p class="certificate-subtitle">منصة دعاء عون للامتحانات الإلكترونية</p>
+                </div>
+
+                <!-- Body -->
+                <div class="certificate-body">
+                    <p class="certificate-intro">
+                        تشهد هذه الوثيقة الرسمية بأن الطالب/ة الموهوب/ة:
+                    </p>
+
+                    <div class="student-name" id="studentNameDisplay">-</div>
+
+                    <p class="certificate-intro">
+                        قد أتم بنجاح امتحان:
+                    </p>
+
+                    <div class="certificate-details">
+                        <div class="detail-item">
+                            <div class="detail-label">اسم الامتحان</div>
+                            <div class="detail-value" id="examNameDisplay">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">المادة الدراسية</div>
+                            <div class="detail-value" id="subjectDisplay">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">الدرجة المحققة</div>
+                            <div class="detail-value" id="scoreDisplay">-</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">التقدير</div>
+                            <div class="detail-value" id="ratingDisplay">-</div>
+                        </div>
+                    </div>
+
+                    <p class="certificate-message">
+                        وحقق درجة متميزة تعكس جهوده واجتهاده المستمر، مما يستحق هذا التقدير والتكريم.
+                    </p>
+
+                    <div class="date-info">
+                        <strong>التاريخ:</strong> <span id="dateDisplay">-</span>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="certificate-footer">
+                    <div class="signatures">
+                        <div class="signature-box">
+                            <div class="signature-line"></div>
+                            <div class="signature-name">مس دعاء عون</div>
+                            <div class="signature-title">مؤسسة المنصة</div>
+                        </div>
+                        <div class="signature-box">
+                            <div class="signature-line"></div>
+                            <div class="signature-name">المدير الفني</div>
+                            <div class="signature-title">منصة دعاء عون</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+            <button class="btn btn-primary" onclick="printCertificate()">🖨️ طباعة</button>
+            <button class="btn btn-primary" onclick="downloadCertificateImage()">📥 تحميل</button>
+            <button class="btn btn-secondary" onclick="goBack()">← العودة</button>
+        </div>
+    </div>
+
+    <script>
+        // Load certificate data
+        function loadCertificateData() {
+            const params = new URLSearchParams(window.location.search);
+            const certIndex = params.get('cert');
+
+            if (certIndex === null) {
+                alert('لم يتم العثور على شهادة');
+                window.history.back();
+                return;
+            }
+
+            const certificates = JSON.parse(localStorage.getItem('certificates') || '[]');
+            const certificate = certificates[certIndex];
+
+            if (!certificate) {
+                alert('الشهادة غير موجودة');
+                window.history.back();
+                return;
+            }
+
+            // Populate certificate data
+            document.getElementById('studentNameDisplay').textContent = certificate.studentName;
+            document.getElementById('examNameDisplay').textContent = certificate.name;
+            document.getElementById('subjectDisplay').textContent = certificate.subject;
+            document.getElementById('scoreDisplay').textContent = certificate.score + '%';
+            document.getElementById('ratingDisplay').textContent = getRating(certificate.score);
+            document.getElementById('dateDisplay').textContent = certificate.date;
+        }
+
+        function getRating(score) {
+            if (score >= 95) return '⭐⭐⭐⭐⭐ ممتاز جداً';
+            if (score >= 85) return '⭐⭐⭐⭐ ممتاز';
+            if (score >= 75) return '⭐⭐⭐ جيد جداً';
+            if (score >= 65) return '⭐⭐ جيد';
+            return '⭐ مقبول';
+        }
+
+        function printCertificate() {
+            window.print();
+        }
+
+        function downloadCertificateImage() {
+            const element = document.querySelector('.certificate');
+            const opt = {
+                margin: 10,
+                filename: 'شهادة.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { orientation: 'landscape', unit: 'mm', format: 'a4' }
+            };
+
+            // Simple download as image using html2canvas
+            html2canvas(element, { scale: 2 }).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/jpeg');
+                link.download = 'شهادة.jpg';
+                link.click();
+            }).catch(err => {
+                alert('تم حفظ الشهادة. يمكنك طباعتها من قائمة الطباعة.');
+                window.print();
+            });
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', loadCertificateData);
+    </script>
+
+    <!-- html2canvas library for image download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>

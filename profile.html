@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي - منصة دعاء عون</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar-main">
+        <div class="container">
+            <div class="navbar-brand">
+                <h1>🎓 منصة دعاء عون</h1>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="dashboard.html" class="nav-link">📚 الامتحانات</a></li>
+                <li><a href="certificates.html" class="nav-link">🎓 الشهادات</a></li>
+                <li><a href="profile.html" class="nav-link active">👤 الملف الشخصي</a></li>
+                <li><a href="#" onclick="handleLogout()" class="nav-link logout">🚪 تسجيل الخروج</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>👤 الملف الشخصي</h1>
+                <p>معلومات الطالب والإحصائيات</p>
+            </div>
+
+            <!-- Profile Content -->
+            <div class="profile-content">
+                <!-- Student Info Card -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2>معلومات الطالب</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="profile-info-grid">
+                            <div class="info-box">
+                                <span class="info-label">اسم الطالب:</span>
+                                <span class="info-value" id="studentName">-</span>
+                            </div>
+                            <div class="info-box">
+                                <span class="info-label">كود الطالب:</span>
+                                <span class="info-value" id="studentCode">-</span>
+                            </div>
+                            <div class="info-box">
+                                <span class="info-label">تاريخ الانضمام:</span>
+                                <span class="info-value" id="joinDate">-</span>
+                            </div>
+                            <div class="info-box">
+                                <span class="info-label">آخر تسجيل دخول:</span>
+                                <span class="info-value" id="lastLogin">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Card -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2>إحصائيات الامتحانات</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="stat-number" id="totalExams">0</div>
+                                <div class="stat-label">إجمالي الامتحانات</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number" id="passedExams">0</div>
+                                <div class="stat-label">الامتحانات الناجحة</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number" id="averageScore">0%</div>
+                                <div class="stat-label">متوسط الدرجات</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number" id="totalCertificates">0</div>
+                                <div class="stat-label">الشهادات المحصلة</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Exams Card -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2>آخر الامتحانات</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="recentExamsContainer" class="recent-exams-list">
+                            <!-- Recent exams will be displayed here -->
+                        </div>
+                        <div id="noRecentExams" class="empty-message" style="display: none;">
+                            <p>لم تأخذ أي امتحانات بعد</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions Card -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2>الإجراءات</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="actions-grid">
+                            <a href="dashboard.html" class="btn btn-primary">العودة للامتحانات</a>
+                            <a href="certificates.html" class="btn btn-secondary">عرض الشهادات</a>
+                            <button class="btn btn-danger" onclick="handleLogout()">تسجيل الخروج</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 منصة دعاء عون. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="profile.js"></script>
+</body>
+</html>

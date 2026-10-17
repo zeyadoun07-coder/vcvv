@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة دعاء عون - الامتحانات الإلكترونية</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .home-header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .home-header-content {
+            max-width: 800px;
+        }
+
+        .home-header h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            animation: slideInDown 0.6s ease;
+        }
+
+        .home-header p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            animation: slideInUp 0.6s ease 0.2s both;
+        }
+
+        /* تنسيق قسم زر ترتيب الطلاب */
+        .rankings-banner {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+            animation: slideInDown 0.6s ease;
+        }
+
+        .rankings-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .btn-ranking {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            color: white !important;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+            transition: all 0.3s ease;
+            border: 2px solid #ffffff;
+        }
+
+        .btn-ranking:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 126, 95, 0.6);
+            background: linear-gradient(45deg, #feb47b, #ff7e5f);
+        }
+
+        .home-header-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideInUp 0.6s ease 0.4s both;
+        }
+
+        .btn-large-home {
+            padding: 15px 40px;
+            font-size: 18px;
+            min-width: 200px;
+        }
+
+        .features-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .features-header h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .features-header p {
+            font-size: 18px;
+            color: var(--text-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: var(--transition);
+            animation: slideInUp 0.6s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .about-section {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .about-header h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .about-list {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        .about-list li {
+            padding: 12px 0;
+            padding-right: 30px;
+            position: relative;
+            color: var(--text-dark);
+            font-size: 16px;
+        }
+
+        .about-list li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+        }
+
+        .stats-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .stat-box {
+            padding: 30px;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .cta-section {
+            padding: 80px 0;
+            text-align: center;
+            background: white;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .home-header h1 {
+                font-size: 32px;
+            }
+
+            .home-header p {
+                font-size: 18px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .features-header h2,
+            .about-header h2,
+            .cta-section h2 {
+                font-size: 28px;
+            }
+
+            .home-header-buttons {
+                flex-direction: column;
+            }
+
+            .btn-large-home {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" style="background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); position: sticky; top: 0; z-index: 100;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0;">
+            <div style="color: white; font-size: 24px; font-weight: 700;">🎓 منصة مس  دعاء عون</div>
+            <a href="login-advanced.html" class="btn btn-light" style="padding: 10px 25px ; " >تسجيل الدخول</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="home-header">
+        <div class="home-header-content">
+            
+            <!-- زر ترتيب الطلاب المميز فوق المحتوى -->
+            <div class="rankings-banner">
+                <div class="rankings-title">🏆 قائمة المتفوقين والأوائل</div>
+                <a href="model.html" class="btn-ranking">عرض ترتيب الطلاب 🎖️</a>
+            </div>
+
+            <h4>🛡️ تنبيه أمان مهم
+
+حرصًا على أمانك وخصوصيتك، تم تصميم منصة دعاء عون لتوفير تجربة تعليمية آمنة وموثوقة للطلاب.
+
+🔐 نرجو الالتزام بالتعليمات التالية:
+
+لا تقم بإدخال بياناتك الشخصية أو بيانات الدخول إلا في الحقول الرسمية والمخصصة لها داخل المنصة.
+لا تستجب لأي رسالة أو نافذة تطلب منك إدخال بياناتك خارج الأماكن الرسمية بالمنصة.
+لا تشارك بيانات الدخول الخاصة بك مع أي شخص.
+إذا ظهرت لك رسالة غير معتادة تطلب بياناتك أو لاحظت أي أمر مشبوه، لا تقم بإدخال أي بيانات.
+
+🚨 في حالة وجود أي مشكلة أو رسالة غير معتادة، توجه إلى قسم «إبلاغ عن مشكلة» داخل المنصة للإبلاغ عنها.
+
+🛡️ أمانك وخصوصيتك تهمنا، ونحرص دائمًا على تقديم تجربة تعليمية موثوقة وآمنة.
+
+<br>
+
+مع تحيات المدير الفني
+
+👨‍💻 زياد عون
+
+الدعم الفني وتطوير المنصة ✨
+
+منصة دعاء عون — تعليم أفضل، وتجربة أكثر أمانًا. 📚🔐</h4>
+            <h1>منصة مس دعاء عون</h1>
+            <p>نظام الامتحانات الإلكترونية الحديث</p>
+            <h2>الصف الاول الثانوي </h2>
+            <h2>انظر الى اسفل لتلقي المعلومات👇👇👇👇👇👇</h2>
+            <div class="home-header-buttons">
+                <a href="login-advanced.html" class="btn btn-light btn-large-home" style="background-color: blueviolet;">ابدأ الآن</a>
+                <a href="Contact.html" class="btn btn-light btn-large-home" style="background-color: white;">ابلاغ عن مشكلة  </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="features-header">
+                <h2>المميزات الرئيسية</h2>
+                <p>كل ما تحتاجه لإدارة الامتحانات بسهولة</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>امتحانات متنوعة</h3>
+                    <p>امتحانات في مواد مختلفة مع أسئلة محدثة بانتظام</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>نظام التايمر</h3>
+                    <p>عداد زمني دقيق لكل امتحان مع تنبيهات</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>نتائج فورية</h3>
+                    <p>احصل على نتائجك مباشرة مع تفاصيل الأسئلة الخاطئة</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>شهادات</h3>
+                    <p>احصل على شهادة عند تحقيق درجة عالية</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>متوافق مع الأجهزة</h3>
+                    <p>استخدم المنصة على أي جهاز (هاتف، تابلت، كمبيوتر)</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>آمن وموثوق</h3>
+                    <p>نظام آمن يحافظ على بيانات الطلاب</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-header">
+                <h2>عن المنصة</h2>
+            </div>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>نظام متطور للامتحانات الإلكترونية</h3>
+                    <p>منصة مس دعاء عون توفر حلاً شاملاً لإدارة الامتحانات الإلكترونية بكفاءة عالية.</p>
+                    <p>تم تصميم المنصة لتوفير تجربة سلسة وسهلة للطلاب والمعلمين.</p>
+                    
+                    <ul class="about-list">
+                        <li>امتحانات في مواد متعددة</li>
+                        <li>نظام تقييم فوري وشامل</li>
+                        <li>تقارير مفصلة للنتائج</li>
+                        <li>واجهة سهلة الاستخدام</li>
+                        <li>دعم فني متواصل</li>
+                    </ul>
+                </div>
+
+                <div class="about-image">
+                    🎯
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 style="font-size: 36px; margin-bottom: 20px;">إحصائيات المنصة</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">امتحانات متاحة</div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">سؤال متنوع</div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">نتائج دقيقة</div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">متاح دائماً</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>هل أنت مستعد للبدء؟</h2>
+            <p>انضم إلى  الطلاب الذين يستخدمون منصة  مس دعاء عون لتحسين مستواهم الدراسي</p>
+            
+            <div class="cta-buttons">
+                <a href="login-advanced.html" class="btn btn-primary btn-large-home">ابدأ الآن</a>
+                <a href="Contact.html" class="btn btn-light btn-large-home" style="background-color: white;">ابلاغ عن مشكلة  </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 منصة دعاء عون. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

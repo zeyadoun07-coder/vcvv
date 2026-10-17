@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة دعاء عون - تسجيل الدخول</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>منصة دعاء عون</h1>
+                <p>نظام الامتحانات الإلكترونية</p>
+            </div>
+
+            <form id="loginForm" class="login-form">
+                 <div class="demo-info">
+                    <p><strong>تعليمات هامة</strong></p>
+                    <p>تاكد من اتصالك بالانتر نت</p>
+                    <p>تاكد من كتابة الكود بشكل صحيح </p>
+                    <p>لا تشارك بياناتك  </p>
+                    <p style="background-color: blue;" >في حالة وجود مشاكل يجب الرجوع الي صفحة الدخول والابلاغ  عن المشكلة</p>
+                    <p>يجب المراجعة جيدا قبل تسليم الاجابة</p>
+                    <p>الامتحان مرة واحدة فقط </p>
+                    <P style= "color: red;">اشراف استاذة دعاء عون</P>
+                    <P>مع تحيات المدير الفني</P>
+                </div>
+                <div class="form-group">
+                    <label for="studentCode">كود الطالب</label>
+                    <input 
+                        type="text" 
+                        id="studentCode" 
+                        name="studentCode" 
+                        placeholder="أدخل كود الطالب"
+                        required
+                    >
+                    <span class="error-message" id="codeError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentName">اسم المستخدم</label>
+                    <input 
+                        type="text" 
+                        id="studentName" 
+                        name="studentName" 
+                        placeholder="أدخل اسم المستخدم"
+                        required
+                    >
+                    <span class="error-message" id="nameError"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-large">دخول</button>
+
+               
+            </form>
+        </div>
+    </div>
+
+    <script src="login-advanced.js"></script>
+</body>

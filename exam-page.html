@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الامتحان - منصة دعاء عون</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar-main">
+        <div class="container">
+            <div class="navbar-brand">
+                <h1>🎓 منصة دعاء عون</h1>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="dashboard.html" class="nav-link">📚 الامتحانات</a></li>
+                <li><a href="certificates.html" class="nav-link">🎓 الشهادات</a></li>
+                <li><a href="profile.html" class="nav-link">👤 الملف الشخصي</a></li>
+                
+                <li><a href="#" onclick="handleLogout()" class="nav-link logout">🚪 تسجيل الخروج</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Top Bar with Student Info and Timer -->
+    <div class="exam-top-bar">
+        <div class="container">
+            <div class="student-info">
+                <span class="student-label">الطالب:</span>
+                <span class="student-name" id="studentName">-</span>
+            </div>
+            <div class="exam-timer-top">
+                <span class="timer-label">⏱️ الوقت المتبقي:</span>
+                <span class="timer-display" id="timerDisplay">00:00</span>
+            </div>
+            <div class="logout-btn">
+                <button class="btn btn-danger btn-small" onclick="handleLogout()">تسجيل الخروج</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Exam Header -->
+            <div class="exam-header">
+                <div class="exam-info">
+                    <h2 id="examTitle">الامتحان</h2>
+                    <p id="examSubject">المادة</p>
+                </div>
+                <div class="exam-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">السؤال:</span>
+                        <span class="stat-value"><span id="questionNumber">1</span> / <span id="totalQuestions">10</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- Exam Content -->
+            <div class="exam-content">
+                <div class="question-card">
+                    <h3 id="questionText">السؤال</h3>
+                    <div class="answers-container" id="answersContainer">
+                        <!-- Answers will be generated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="exam-navigation">
+                <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn" style="display: none;">← السؤال السابق</button>
+                <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn">السؤال التالي →</button>
+                <button class="btn btn-success btn-large" onclick="submitExam()" id="submitBtn" style="display: none;">📤 إنهاء الامتحان</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Results Section -->
+    <section id="resultsSection" class="results-section" style="display: none;">
+        <div class="container">
+            <div class="results-card">
+                <div class="results-header">
+                    <h1>📊 نتائج الامتحان</h1>
+                </div>
+
+                <div class="results-content">
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <span id="finalScore">0</span>
+                            <span class="score-max">/ 100</span>
+                        </div>
+                        <div class="score-info">
+                            <p id="scorePercentage">0%</p>
+                            <p id="scoreRating">جيد</p>
+                        </div>
+                    </div>
+
+                    <div class="results-details">
+                        <div class="detail-item">
+                            <span class="detail-label">اسم الامتحان:</span>
+                            <span class="detail-value" id="detailExamName">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">المادة:</span>
+                            <span class="detail-value" id="detailSubject">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">عدد الأسئلة:</span>
+                            <span class="detail-value" id="detailQuestions">10</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">الإجابات الصحيحة:</span>
+                            <span class="detail-value" id="detailCorrect">0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">الإجابات الخاطئة:</span>
+                            <span class="detail-value" id="detailWrong">0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">اسم الطالب:</span>
+                            <span class="detail-value" id="detailStudentName">-</span>
+                        </div>
+                    </div>
+
+                    <!-- Wrong Answers Section -->
+                    <div class="wrong-answers-section">
+                        <h3>❌ الأسئلة التي أخطأت فيها:</h3>
+                        <div id="wrongAnswersContainer" class="wrong-answers-container">
+                            <!-- Wrong answers will be displayed here -->
+                        </div>
+                    </div>
+
+                    <!-- Certificate Section -->
+                    <div id="certificateSection" class="certificate-section" style="display: none;">
+                        <div class="certificate-message">
+                            <h2>🎉 مبروك!</h2>
+                            <p>لقد حصلت على شهادة إتمام الامتحان!</p>
+                        </div>
+                    </div>
+
+                    <!-- No Certificate Message -->
+                    <div id="noCertificateSection" class="no-certificate-section" style="display: none;">
+                        <p>⚠️ للحصول على شهادة، يجب أن تحصل على درجة أعلى من 95</p>
+                    </div>
+
+                    <div class="results-actions">
+                        <button class="btn btn-secondary" onclick="backToDashboard()">← العودة للامتحانات</button>
+                        <button class="btn btn-danger" onclick="handleLogout()">🚪 تسجيل الخروج</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 منصة دعاء عون. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="exam-page.js"></script>
+</body>

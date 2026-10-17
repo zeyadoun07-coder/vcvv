@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة اللغة العربية - بوابة الطالب الفاخرة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-primary: #0b0f19;
+            --bg-card: rgba(17, 24, 39, 0.75);
+            --border-card: rgba(212, 175, 55, 0.25);
+            --gold-primary: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #aa771c 100%);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --shadow-glow: 0 0 25px rgba(212, 175, 55, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(170, 119, 28, 0.05) 0%, transparent 40%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 540px;
+            padding: 20px;
+            z-index: 10;
+        }
+
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-card);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: var(--shadow-glow), 0 20px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+        }
+
+        .header-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header-title i {
+            font-size: 45px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.3));
+        }
+
+        .header-title h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        .header-title p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-group i {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold-primary);
+            font-size: 18px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            background: rgba(11, 15, 25, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-luxury {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold-gradient);
+            border: none;
+            border-radius: 14px;
+            color: #0b0f19;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-luxury:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+        }
+
+        .error-msg {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .result-container {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .student-profile {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .student-profile h2 {
+            font-size: 22px;
+            color: var(--gold-light);
+            margin-bottom: 5px;
+        }
+
+        .student-profile span {
+            color: var(--text-muted);
+            font-size: 13px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: rgba(11, 15, 25, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 12px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .stat-box .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .stat-box .value {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .stat-box .time-info {
+            font-size: 10px;
+            color: var(--gold-light);
+            margin-top: 4px;
+            direction: ltr;
+        }
+
+        .stat-box.highlight {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(17, 24, 39, 0.8));
+            border-color: var(--gold-primary);
+        }
+
+        .stat-box.highlight .value {
+            font-size: 22px;
+            color: var(--gold-primary);
+        }
+
+        .certificate-box {
+            grid-column: span 2;
+            padding: 14px;
+            border-radius: 14px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .cert-yes {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #34d399;
+        }
+
+        .cert-no {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #f87171;
+        }
+
+        .btn-back {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-muted);
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            border-color: var(--text-main);
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            
+            <div id="loginSection">
+                <div class="header-title">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <h1>منصة اللغة العربية مس دعاء عون</h1>
+                    <h4>مع تحيات المدير الفني /زياد عون </h4>
+                    <p>أدخل كود الطالب الخاص بك لعرض التقرير الشامل</p>
+                </div>
+
+                <div id="errorMsg" class="error-msg">الكود غير صحيح، تأكد من الرقم المدخل!</div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-id-card"></i>
+                    <input type="text" id="studentCodeInput" class="input-field" placeholder="أدخل كود الطالب (مثال: 32328)" autocomplete="off">
+                </div>
+
+                <button class="btn-luxury" onclick="loginStudent()">
+                    <span>عرض النتيجة والتقرير</span>
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </div>
+
+            <div id="resultSection" class="result-container">
+                <div class="student-profile">
+                    <h2 id="resStudentName">اسم الطالب</h2>
+                    <span id="resUserName">اسم المستخدم</span>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="label">1. الأدب الجاهلي (من 10)</div>
+                        <div class="value" id="resExam1">-</div>
+                        <div class="time-info" id="timeExam1"></div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="label">2. كان التامة والناقصة (من 10)</div>
+                        <div class="value" id="resExam2">-</div>
+                        <div class="time-info" id="timeExam2"></div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="label">3. كاد وأخواتها (من 9)</div>
+                        <div class="value" id="resExam3">-</div>
+                        <div class="time-info" id="timeExam3"></div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="label">4. الاستعارة المكنية (من 9)</div>
+                        <div class="value" id="resExam4">-</div>
+                        <div class="time-info" id="timeExam4"></div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="label">الترتيب على المجموعة</div>
+                        <div class="value" id="resRank" style="color: var(--gold-primary);">-</div>
+                    </div>
+                    <div class="stat-box highlight">
+                        <div class="label">المجموع الكلي المكتسب</div>
+                        <div class="value" id="resTotal">-</div>
+                    </div>
+                    
+                    <div id="resCertificateBox" class="certificate-box"></div>
+                </div>
+
+                <button class="btn-back" onclick="logoutStudent()">
+                    <i class="fa-solid fa-right-from-bracket"></i> تسجيل خروج / بحث عن طالب آخر
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // قاعدة البيانات محدثة مع إضافة الطالب ياسين الحويف
+        const studentsDatabase = {
+            '32328': {
+                name: 'HUHUH', realName: 'ياسين الحويف',
+                scores: {
+                    exam1: null,
+                    exam2: null,
+                    exam3: null,
+                    exam4: null
+                }
+            },
+            '52587': {
+                name: 'MNBVC', realName: 'ناصر شنكار',
+                scores: {
+                    exam1: { score: 10, time: '8/12/2026 1:34:48' },
+                    exam2: null,
+                    exam3: null,
+                    exam4: null
+                }
+            },
+            '78963': {
+                name: 'POIUY', realName: 'هنا رخا',
+                scores: {
+                    exam1: { score: 8, time: '8/12/2026 3:38:59' },
+                    exam2: { score: 10, time: '8/22/2026 15:20:05' },
+                    exam3: { score: 7, time: '9/12/2026 15:52:13' },
+                    exam4: null
+                }
+            },
+            '21586': {
+                name: 'SDFRT', realName: 'الين الرحماني',
+                scores: {
+                    exam1: { score: 10, time: '8/12/2026 21:16:50' },
+                    exam2: { score: 4, time: '8/21/2026 19:35:05' },
+                    exam3: { score: 4, time: '9/11/2026 9:29:52' },
+                    exam4: null
+                }
+            },
+            '36987': {
+                name: 'MKIUY', realName: 'ندين نصر',
+                scores: {
+                    exam1: { score: 8, time: '8/12/2026 23:59:25' },
+                    exam2: { score: 6, time: '8/22/2026 4:50:37' },
+                    exam3: null,
+                    exam4: null
+                }
+            },
+            '22586': {
+                name: 'DFYMQ', realName: 'ادم رامي',
+                scores: {
+                    exam1: { score: 8, time: '8/13/2026 1:52:23' },
+                    exam2: { score: 9, time: '8/17/2026 0:39:01' },
+                    exam3: { score: 7, time: '9/11/2026 20:32:25' },
+                    exam4: { score: 8, time: '9/28/2026 21:12:54' }
+                }
+            },
+            '89742': {
+                name: 'VKILO', realName: 'شهد عمرو',
+                scores: {
+                    exam1: { score: 8, time: '8/14/2026 2:06:49' },
+                    exam2: null,
+                    exam3: null,
+                    exam4: null
+                }
+            },
+            '66652': {
+                name: 'JKUYT', realName: 'ابراهيم عون',
+                scores: {
+                    exam1: { score: 10, time: '8/22/2026 4:26:34' },
+                    exam2: null,
+                    exam3: { score: 8, time: '9/11/2026 0:42:31' },
+                    exam4: null
+                }
+            },
+            '36598': {
+                name: 'NHYUT', realName: 'مريم سويلم',
+                scores: {
+                    exam1: null,
+                    exam2: { score: 7, time: '8/21/2026 16:00:26' },
+                    exam3: { score: 9, time: '9/11/2026 0:21:24' },
+                    exam4: { score: 8, time: '9/29/2026 17:37:52' }
+                }
+            },
+            '20126': {
+                name: 'BBBVG', realName: 'شهد البحراوي',
+                scores: {
+                    exam1: null,
+                    exam2: { score: 8, time: '8/21/2026 19:04:50' },
+                    exam3: { score: 8.5, time: '9/11/2026 16:38:37' },
+                    exam4: { score: 9, time: '9/27/2026 23:10:47' }
+                }
+            },
+            '23587': { name: 'GHKLO', realName: 'ياسين ابراهيم', scores: { exam1: null, exam2: null, exam3: null, exam4: null } },
+            '12458': { name: 'GGTYS', realName: 'حبيبة معمر', scores: { exam1: null, exam2: null, exam3: null, exam4: null } },
+            '32147': { name: 'DERTY', realName: 'يوسف الكلاف', scores: { exam1: null, exam2: null, exam3: null, exam4: null } },
+            '21478': { name: 'HYHUI', realName: 'عبد الرحمن لطفي', scores: { exam1: null, exam2: null, exam3: null, exam4: null } },
+            '14789': { name: 'HYHYJ', realName: 'رودينا جميل', scores: { exam1: null, exam2: null, exam3: null, exam4: null } },
+            '15896': { name: 'GKLMO', realName: 'احمد بسيوني', scores: { exam1: null, exam2: null, exam3: null, exam4: null } },
+            '25801': { name: 'DTDTD', realName: 'ملك هاني كشك', scores: { exam1: null, exam2: null, exam3: null, exam4: null } },
+            '15928': { name: 'SESES', realName: 'عائشة ماجد', scores: { exam1: null, exam2: null, exam3: null, exam4: null } }
+        };
+
+        const maxExam1 = 10;
+        const maxExam2 = 10;
+        const maxExam3 = 9;
+        const maxExam4 = 9;
+
+        function renderExamScore(examData, maxScore, valId, timeId) {
+            const valElem = document.getElementById(valId);
+            const timeElem = document.getElementById(timeId);
+
+            if (examData && examData.score !== null) {
+                valElem.innerHTML = `${examData.score} / ${maxScore}`;
+                timeElem.innerHTML = `<i class="fa-regular fa-clock"></i> ${examData.time}`;
+            } else {
+                valElem.innerHTML = '<span style="color: #f87171; font-size: 13px;">لم تخض الامتحان</span>';
+                timeElem.innerHTML = '';
+            }
+        }
+
+        function loginStudent() {
+            const codeInput = document.getElementById('studentCodeInput').value.trim();
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (!studentsDatabase[codeInput]) {
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            errorMsg.style.display = 'none';
+
+            let sortedStudents = Object.keys(studentsDatabase).map(id => {
+                let s = studentsDatabase[id];
+                let total = 0;
+                let maxPossible = 0;
+
+                if (s.scores.exam1) { total += s.scores.exam1.score; maxPossible += maxExam1; }
+                if (s.scores.exam2) { total += s.scores.exam2.score; maxPossible += maxExam2; }
+                if (s.scores.exam3) { total += s.scores.exam3.score; maxPossible += maxExam3; }
+                if (s.scores.exam4) { total += s.scores.exam4.score; maxPossible += maxExam4; }
+
+                let ratio = maxPossible > 0 ? (total / maxPossible) : 0;
+                return { id: id, total: total, maxPossible: maxPossible, ratio: ratio };
+            });
+
+            sortedStudents.sort((a, b) => b.ratio - a.ratio || b.total - a.total);
+            let studentRank = sortedStudents.findIndex(item => item.id === codeInput) + 1;
+
+            let student = studentsDatabase[codeInput];
+            let studentTotal = 0;
+            let studentMaxPossible = 0;
+
+            if (student.scores.exam1) { studentTotal += student.scores.exam1.score; studentMaxPossible += maxExam1; }
+            if (student.scores.exam2) { studentTotal += student.scores.exam2.score; studentMaxPossible += maxExam2; }
+            if (student.scores.exam3) { studentTotal += student.scores.exam3.score; studentMaxPossible += maxExam3; }
+            if (student.scores.exam4) { studentTotal += student.scores.exam4.score; studentMaxPossible += maxExam4; }
+
+            let ratioVal = studentMaxPossible > 0 ? (studentTotal / studentMaxPossible) : 0;
+
+            document.getElementById('resStudentName').innerText = student.realName;
+            document.getElementById('resUserName').innerText = `اسم المستخدم: ${student.name} | الكود: ${codeInput}`;
+            
+            renderExamScore(student.scores.exam1, maxExam1, 'resExam1', 'timeExam1');
+            renderExamScore(student.scores.exam2, maxExam2, 'resExam2', 'timeExam2');
+            renderExamScore(student.scores.exam3, maxExam3, 'resExam3', 'timeExam3');
+            renderExamScore(student.scores.exam4, maxExam4, 'resExam4', 'timeExam4');
+            
+            document.getElementById('resRank').innerText = studentMaxPossible > 0 ? `المركز #${studentRank} على المجموعة` : 'غير مصنف';
+            document.getElementById('resTotal').innerText = `${studentTotal} / ${studentMaxPossible}`;
+
+            const certBox = document.getElementById('resCertificateBox');
+            if (studentMaxPossible > 0 && ratioVal >= 0.8) {
+                certBox.className = 'certificate-box cert-yes';
+                certBox.innerHTML = `<i class="fa-solid fa-award"></i> مبارك! يوجد شهادة تقدير مستحقة بنجاح`;
+            } else {
+                certBox.className = 'certificate-box cert-no';
+                certBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> لم يتم الوصول للحد الأدنى (لا توجد شهادة حالياً)`;
+            }
+
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('resultSection').style.display = 'block';
+        }
+
+        function logoutStudent() {
+            document.getElementById('studentCodeInput').value = '';
+            document.getElementById('resultSection').style.display = 'none';
+            document.getElementById('loginSection').style.display = 'block';
+        }
+
+        document.getElementById('studentCodeInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                loginStudent();
+            }
+        });
+    </script>
+</body>
+</html>

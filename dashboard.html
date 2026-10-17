@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - منصة دعاء عون</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar-main">
+        <div class="container">
+            <div class="navbar-brand">
+                <h1>🎓 منصة دعاء عون</h1>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="dashboard.html" class="nav-link active">📚 الامتحانات</a></li>
+                <li><a href="certificates.html" class="nav-link">🎓 الشهادات</a></li>
+                <li><a href="profile.html" class="nav-link">👤 الملف الشخصي</a></li>
+                <li><a href="#" onclick="handleLogout()" class="nav-link logout">🚪 تسجيل الخروج</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Top Bar with Student Info -->
+    <div class="exam-top-bar">
+        <div class="container">
+            <div class="student-info">
+                <span class="student-label">الطالب:</span>
+                <span class="student-name" id="studentName">-</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <h1>🎓 الامتحانات المتاحة</h1>
+                <p>اختر الامتحان الذي تريد الإجابة عليه</p>
+            </div>
+
+            <!-- Exams Grid -->
+            <div id="examsGrid" class="exams-grid">
+                <!-- Exam cards will be generated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Exam Details Modal -->
+    <div id="examModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalExamName">-</h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="exam-details-grid">
+                    <div class="detail-box">
+                        <span class="detail-label">المادة:</span>
+                        <span class="detail-value" id="modalSubject">-</span>
+                    </div >
+                    <div class="detail-box">
+                        <span class="detail-label">عدد الأسئلة:</span>
+                        <span class="detail-value" id="modalQuestionsCount">-</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="detail-label">مدة الامتحان:</span>
+                        <span class="detail-value" id="modalDuration">-</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="detail-label">درجة النجاح:</span>
+                        <span class="detail-value" id="modalPassingScore">-</span>
+                    </div>
+                </div>
+                <div class="exam-description">
+                    <p id="modalDescription">-</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">إلغاء</button>
+                <button class="btn btn-primary btn-large" onclick="startExamFromModal()">ابدأ الامتحان</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 منصة دعاء عون. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
